@@ -1,15 +1,16 @@
 CREATE TABLE users(
   id int primary key,
   reputation int not null,
+  views int not null,
+  upvotes int not null,
+  downvotes int not null,
   creation_date text not null,
   display_name text not null,
-  email_hash text not null,
+  image_url text not null,
   last_access_date text not null,
   location text not null,
   about_me text not null,
-  views int not null,
-  upvotes int not null,
-  downvotes int not null
+  email_hash text not null
 );
 
 CREATE TABLE badges(
@@ -22,24 +23,24 @@ CREATE TABLE badges(
 CREATE TABLE posts(
   id int primary key,
   post_type text not null check (post_type in ('question', 'answer', 'wiki', 'tag-wiki-excerpt', 'tag-wiki', 'moderation-nomination', 'wiki-placeholder', 'privilege-wiki')),
-  accepted_answer_id int references posts(id),
-  parent_id int references posts(id),
-  creation_date text not null,
-  community_owned_date text,
-  closed_date text,
   score int not null,
   view_count int not null,
-  body text not null,
+  answer_count int not null,
+  comment_count int not null,
+  favorite_count int not null,
+  creation_date text not null,
+  closed_date text,
+  accepted_answer_id int references posts(id),
+  parent_id int references posts(id),
   owner_user_id int references users(id),
+  community_owned_date text,
+  tags text,
+  title text,
+  body text not null,
   last_editor_user_id int references users(id),
   last_editor_display_name text,
   last_edit_date text,
-  last_activity_date text not null,
-  title text,
-  tags text,
-  answer_count int not null,
-  comment_count int not null,
-  favorite_count int not null
+  last_activity_date text not null
 );
 
 CREATE TABLE votes(
@@ -55,10 +56,10 @@ CREATE TABLE votes(
 CREATE TABLE comments(
   id int primary key,
   post_id int not null references posts(id),
-  score int not null,
-  text text not null,
+  user_id int not null references users(id),
   creation_date text not null,
-  user_id int not null references users(id)
+  score int not null,
+  text text not null
 );
 
 -- TODO: views for questions and answers

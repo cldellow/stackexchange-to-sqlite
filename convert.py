@@ -57,7 +57,7 @@ def import_users(conn):
     rows = tree.getroot()
     for row in rows:
         attrs = row.attrib
-        cur = conn.execute('INSERT INTO users(id, reputation, creation_date, display_name, email_hash, last_access_date, location, about_me, views, upvotes, downvotes) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+        cur = conn.execute('INSERT INTO users(id, reputation, creation_date, display_name, email_hash, last_access_date, location, about_me, views, upvotes, downvotes, image_url) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
                      [
                          int(attrs['Id']),
                          int(attrs['Reputation']),
@@ -70,6 +70,7 @@ def import_users(conn):
                          int(attrs['Views']),
                          int(attrs['UpVotes']),
                          int(attrs['DownVotes']),
+                         'https://www.gravatar.com/avatar/{}'.format(attrs['EmailHash'])
                      ])
 
 def post_type(ptid):
