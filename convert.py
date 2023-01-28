@@ -19,6 +19,7 @@ def go():
     import_posts(conn)
     import_votes(conn)
     import_comments(conn)
+    create_indexes(conn)
     conn.commit()
     conn.close()
 
@@ -33,6 +34,12 @@ def create_schema(conn):
     f = open('schema.sql')
     conn.executescript(f.read())
     f.close()
+
+def create_indexes(conn):
+    f = open('indexes.sql')
+    conn.executescript(f.read())
+    f.close()
+
 
 def timestamp(ts):
     # Switch from ISO8601 to SQL format
