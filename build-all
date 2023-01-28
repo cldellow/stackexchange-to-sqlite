@@ -1,0 +1,9 @@
+#!/bin/bash
+set -euo pipefail
+
+for db in cooking superuser; do
+  rm -f input
+  ln -sf "$db"-input/ input
+  ./convert.py
+  cp stack.db ~/src/datasette-ui-extras/"$db".db
+done

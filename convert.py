@@ -99,7 +99,7 @@ def import_posts(conn):
     rows = tree.getroot()
     for row in rows:
         attrs = row.attrib
-        cur = conn.execute('INSERT INTO posts(id, post_type, accepted_answer_id, parent_id, creation_date, community_owned_date, closed_date, score, view_count, body, owner_user_id, last_editor_user_id, last_edit_date, last_activity_date, title, tags, answer_count, comment_count, favorite_count) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+        cur = conn.execute('INSERT INTO posts(id, post_type, accepted_answer_id, parent_id, creation_date, community_owned_date, closed_date, score, views, body, owner_user_id, last_editor_user_id, last_edit_date, last_activity_date, title, tags, answers, comments, favorites) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
                      [
                          int(attrs['Id']),
                          post_type(int(attrs['PostTypeId'])),
