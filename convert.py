@@ -48,7 +48,7 @@ def import_badges(conn):
                          int(attrs['Id']),
                          int(attrs['UserId']),
                          attrs['Name'],
-                         attrs['Date'],
+                         timestamp(attrs['Date']),
                      ])
 
 

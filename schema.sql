@@ -30,8 +30,8 @@ CREATE TABLE posts(
   score int not null,
   view_count int not null,
   body text not null,
-  owner_user_id int,
-  last_editor_user_id int,
+  owner_user_id int references users(id),
+  last_editor_user_id int references users(id),
   last_editor_display_name text,
   last_edit_date text,
   last_activity_date text not null,
@@ -58,7 +58,7 @@ CREATE TABLE comments(
   score int not null,
   text text not null,
   creation_date text not null,
-  user_id int not null references uesrs(id)
+  user_id int not null references users(id)
 );
 
 -- TODO: views for questions and answers
