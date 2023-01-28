@@ -38,7 +38,6 @@ CREATE TABLE posts(
   title text,
   body text not null,
   last_editor_user_id int references users(id),
-  last_editor_display_name text,
   last_edit_date text,
   last_activity_date text not null
 );
@@ -62,4 +61,39 @@ CREATE TABLE comments(
   text text not null
 );
 
--- TODO: views for questions and answers
+CREATE VIEW questions AS
+SELECT
+  id,
+  score,
+  view_count,
+  answer_count,
+  comment_count,
+  favorite_count,
+  creation_date,
+  closed_date,
+  accepted_answer_id,
+  owner_user_id,
+  community_owned_date,
+  tags,
+  title,
+  body,
+  last_editor_user_id,
+  last_edit_date,
+  last_activity_date
+FROM posts WHERE post_type = 'question';
+
+CREATE VIEW answers AS
+SELECT
+  id,
+  score,
+  comment_count,
+  creation_date,
+  parent_id,
+  owner_user_id,
+  community_owned_date,
+  body,
+  last_editor_user_id,
+  last_edit_date,
+  last_activity_date
+FROM posts WHERE post_type = 'answer';
+

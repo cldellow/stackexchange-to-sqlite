@@ -92,7 +92,7 @@ def import_posts(conn):
     rows = tree.getroot()
     for row in rows:
         attrs = row.attrib
-        cur = conn.execute('INSERT INTO posts(id, post_type, accepted_answer_id, parent_id, creation_date, community_owned_date, closed_date, score, view_count, body, owner_user_id, last_editor_user_id, last_editor_display_name, last_edit_date, last_activity_date, title, tags, answer_count, comment_count, favorite_count) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+        cur = conn.execute('INSERT INTO posts(id, post_type, accepted_answer_id, parent_id, creation_date, community_owned_date, closed_date, score, view_count, body, owner_user_id, last_editor_user_id, last_edit_date, last_activity_date, title, tags, answer_count, comment_count, favorite_count) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
                      [
                          int(attrs['Id']),
                          post_type(int(attrs['PostTypeId'])),
@@ -106,7 +106,6 @@ def import_posts(conn):
                          attrs['Body'],
                          int(attrs['OwnerUserId']) if 'OwnerUserId' in attrs else None,
                          int(attrs['LastEditorUserId']) if 'LastEditorUserId' in attrs else None,
-                         attrs['LastEditorDisplayName'] if 'LastEditorDisplayName' in attrs else None,
                          timestamp(attrs['LastEditDate']) if 'LastEditDate' in attrs else None,
                          timestamp(attrs['LastActivityDate']),
                          attrs['Title'] if 'Title' in attrs else None,
