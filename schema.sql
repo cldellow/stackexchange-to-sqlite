@@ -1,5 +1,5 @@
 CREATE TABLE users(
-  id int primary key,
+  id integer not null primary key,
   reputation int not null,
   views int not null,
   upvotes int not null,
@@ -14,14 +14,14 @@ CREATE TABLE users(
 );
 
 CREATE TABLE badges(
-  id int primary key,
+  id integer not null primary key,
   user_id int not null references users(id),
   name text not null,
   date text not null
 );
 
 CREATE TABLE posts(
-  id int primary key,
+  id integer not null primary key,
   post_type text not null check (post_type in ('question', 'answer', 'wiki', 'tag-wiki-excerpt', 'tag-wiki', 'moderation-nomination', 'wiki-placeholder', 'privilege-wiki')),
   score int not null,
   views int not null,
@@ -43,7 +43,7 @@ CREATE TABLE posts(
 );
 
 CREATE TABLE votes(
-  id int primary key,
+  id integer not null primary key,
   post_id int not null references posts(id),
   -- CONSIDER: translate vote_type_id ?
   vote_type text not null check (vote_type in ('accepted', 'up', 'down', 'offensive', 'favorite', 'close', 'reopen', 'bounty-start', 'bounty-close', 'delete', 'undelete', 'spam', 'mod-view-flagged', 'edit-approved')),
@@ -53,7 +53,7 @@ CREATE TABLE votes(
 );
 
 CREATE TABLE comments(
-  id int primary key,
+  id integer not null primary key,
   post_id int not null references posts(id),
   user_id int not null references users(id),
   creation_date text not null,
